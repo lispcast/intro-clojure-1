@@ -305,20 +305,27 @@
      (println "nothing")))
   :ok)
 
-(println "Welcome to the bakery!")
+(defn bakery-help
+  "Print out some helpful text to remember the available commands."
+  []
+  (println "Welcome to the bakery!")
+  (println)
+  (println "Available commands are: ")
+  (println "grab \t\t Pick something up.")
+  (println "squeeze \t Squeeze whatever you are holding.")
+  (println "release \t Release whatever you are holding.")
+  (println "scoop \t\t If you are holding the cup, fill it with an ingredient.")
+  (println "add-to-bowl \t Add the ingredient you are holding to the mixing bowl.")
+  (println "mix \t\t Mix the ingredients in the bowl.")
+  (println "pour-into-pan \t Pour the contents of the bowl into the pan.")
+  (println "bake-pan \t Put the pan in the oven for a certain number of minutes.")
+  (println "cool-pan \t After baking, put the pan on the cooling racks to cool.")
+  (println "\t\t Returns the id of the cooling rack.")
+  (println "status \t\t Print out the status of the bakery.")
+  (println "start-over \t If you get lost, this command will reset the bakery.")
+  (println)
+  (println "bakery-help \t Print out this message.")
 
-(println "Available commands are: ")
-(println "grab \t\t Pick something up.")
-(println "squeeze \t Squeeze whatever you are holding.")
-(println "release \t Release whatever you are holding.")
-(println "scoop \t\t If you are holding the cup, fill it with an ingredient.")
-(println "add-to-bowl \t Add the ingredient you are holding to the mixing bowl.")
-(println "mix \t\t Mix the ingredients in the bowl.")
-(println "pour-into-pan \t Pour the contents of the bowl into the pan.")
-(println "bake-pan \t Put the pan in the oven for a certain number of minutes.")
-(println "cool-pan \t After baking, put the pan on the cooling racks to cool.")
-(println "\t\t Returns the id of the cooling rack.")
-(println "status \t\t Print out the status of the bakery.")
-(println "start-over \t If you get lost, this command will reset the bakery.")
+  'welcome)
 
-'welcome
+(bakery-help)
