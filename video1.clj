@@ -225,7 +225,12 @@
 (defn bake-pan
   "Put the pan in the oven and bake it for so many minutes."
   [minutes]
-  (if (number? minutes)
+  (cond
+    (nil? (:contents @pan-state))
+    (do
+      (println "There is nothing to bake: the pan is empty!")
+      :error)
+    (number? minutes)
     (do
       (println "Baking" minutes "minutes. . .")
       (dosync
@@ -234,6 +239,7 @@
       (println "Done!")
       (println "The result is" (name (:contents @pan-state)))
       :ok)
+    :else
     (do
       (println "I need a number of minutes to bake. You gave me a" (type minutes))
       :error)))
