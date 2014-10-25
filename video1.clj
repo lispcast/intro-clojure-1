@@ -186,35 +186,35 @@
     (ref-set bowl-state {})
     :ok)))
 
-(defn bake [p m]
+(defn bake [pan-contents minutes]
   (cond
-   (= p
+   (= pan-contents
       {:flour 1
        :egg 1
        :sugar 1
        :butter 1})
    (cond
-    (< m 30)
+    (< minutes 30)
     :mushy-mess
-    (> m 30)
+    (> minutes 30)
     :burned-mess
-    (= m 30)
+    (= minutes 30)
     :cookies)
 
-   (= p
+   (= pan-contents
       {:flour 2
        :egg 2
        :milk 1
        :sugar 1})
    (cond
-    (< m 25)
+    (< minutes 25)
     :mushy-mess
-    (> m 25)
+    (> minutes 25)
     :burned-mess
-    (= m 25)
+    (= minutes 25)
     :cake)
 
-   (nil? p)
+   (nil? pan-contents)
    (do
      (println "Baking an empty pan.")
      nil)
