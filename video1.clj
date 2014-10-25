@@ -186,35 +186,35 @@
     (ref-set bowl-state {})
     :ok)))
 
-(defn bake [p m]
+(defn bake [pan-contents minutes]
   (cond
-   (= p
+   (= pan-contents
       {:flour 1
        :egg 1
        :sugar 1
        :butter 1})
    (cond
-    (< m 30)
+    (< minutes 30)
     :mushy-mess
-    (> m 30)
+    (> minutes 30)
     :burned-mess
-    (= m 30)
+    (= minutes 30)
     :cookies)
 
-   (= p
+   (= pan-contents
       {:flour 2
        :egg 2
        :milk 1
        :sugar 1})
    (cond
-    (< m 25)
+    (< minutes 25)
     :mushy-mess
-    (> m 25)
+    (> minutes 25)
     :burned-mess
-    (= m 25)
+    (= minutes 25)
     :cake)
 
-   (nil? p)
+   (nil? pan-contents)
    (do
      (println "Baking an empty pan.")
      nil)
@@ -225,15 +225,21 @@
 (defn bake-pan
   "Put the pan in the oven and bake it for so many minutes."
   [minutes]
-  (if (number? minutes)
+  (cond
+    (nil? (:contents @pan-state))
+    (do
+      (println "There is nothing to bake: the pan is empty!")
+      :error)
+    (number? minutes)
     (do
       (println "Baking" minutes "minutes. . .")
       (dosync
-       (alter pan-state update-in [:contents] bake minutes)
-       (alter pan-state assoc :baking true))
+        (alter pan-state update-in [:contents] bake minutes)
+        (alter pan-state assoc :baking true))
       (println "Done!")
       (println "The result is" (name (:contents @pan-state)))
       :ok)
+    :else
     (do
       (println "I need a number of minutes to bake. You gave me a" (type minutes))
       :error)))
